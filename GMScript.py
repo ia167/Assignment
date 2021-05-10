@@ -55,8 +55,9 @@ NDVI = (nirBand-redBand)/(nirBand+redBand) # NDVI calculation
 
 class_bins2 = [0.5, 1] # Reclassifies these pixel values into classes 1, 2, 3, 4 & 5 respectively
 reclass_NDVI = xr.apply_ufunc (np.digitize, NDVI, class_bins2) # Digitizes nDSM image to be displayed with new classes
-show(reclass_NDVI)
+#show(reclass_NDVI)
 
-# Step five: Fuse nDSM and NDVI
+# Step five: Fuse reclassified nDSM and NDVI
 
-# Step six: Display final fused image
+print('Is the spatial extent the same?', reclass_nDSM.rio.bounds() == reclass_NDVI.rio.bounds())
+print('Is the resolution the same?', reclass_nDSM.rio.resolution() == reclass_NDVI.rio.bounds())
