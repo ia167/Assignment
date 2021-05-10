@@ -21,6 +21,12 @@ print('Coordinate Reference System:', DTM.crs)
 # Now processing of data begins to produce fused image
 # Step one: Combine DTM and DSM by subtraction to create nDSM
 
+DTM_Band1 = DTM.read(1, masked=True) # Creates a masked array
+DSM_Band1 = DSM.read(1, masked=True)
+NewDTM = DTM_Band1.astype('f4') # Converts pixel number integers to floating point to avoid rounding in calculation
+NewDSM = DSM_Band1.astype('f4')
+nDSM = (NewDSM - NewDTM) # nDSM calculation
+show(nDSM)
 
 # Step two: Reclassify nDSM
 
