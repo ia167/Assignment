@@ -37,7 +37,7 @@ print(data_min_value, data_max_value)
 
 class_bins = [-np.inf, 2, 4, 10, np.inf] # Reclassifies these pixel values into classes 1, 2, 3, 4 & 5 respectively
 reclass_nDSM = xr.apply_ufunc (np.digitize, nDSM, class_bins) # Digitizes nDSM image to be displayed with new classes
-show(reclass_nDSM)
+#show(reclass_nDSM)
 
 # Step three: Calculate NDVI from Orthophoto Bands 1 and 4
 
@@ -52,6 +52,10 @@ NDVI = (nirBand-redBand)/(nirBand+redBand) # NDVI calculation
 #show(NDVI)
 
 # Step four: Reclassify NDVI
+
+class_bins2 = [0.5, 1] # Reclassifies these pixel values into classes 1, 2, 3, 4 & 5 respectively
+reclass_NDVI = xr.apply_ufunc (np.digitize, NDVI, class_bins2) # Digitizes nDSM image to be displayed with new classes
+show(reclass_NDVI)
 
 # Step five: Fuse nDSM and NDVI
 
