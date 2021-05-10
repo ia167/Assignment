@@ -17,11 +17,6 @@ Ortho = rio.open ('C:\GIS_Ulster\Programming\Assignment\Data\Ortho.tif')
 # show(DTM)
 print('Coordinate Reference System:', DTM.crs)
 
-full_Ortho = Ortho.read()
-num_bands = Ortho.count
-print('Number of bands in image =', num_bands)
-Ortho_Band1 = Ortho.read(1) # Separates out band 1 (red band) from Ortho into its own array
-Ortho_Band4 = Ortho.read(4) # Separares out band 4 (NIR band) from Ortho into its own array
 
 # Now processing of data begins to produce fused image
 # Step one: Combine DTM and DSM by subtraction to create nDSM
@@ -30,10 +25,15 @@ Ortho_Band4 = Ortho.read(4) # Separares out band 4 (NIR band) from Ortho into it
 # Step two: Reclassify nDSM
 
 # Step three: Calculate NDVI from Orthophoto Bands 1 and 4
+full_Ortho = Ortho.read()
+num_bands = Ortho.count
+print('Number of bands in image =', num_bands) # Displays number of bands in Orthophoto
+Ortho_Band1 = Ortho.read(1) # Separates out band 1 (red band) from Ortho into its own array
+Ortho_Band4 = Ortho.read(4) # Separares out band 4 (NIR band) from Ortho into its own array
 
-redBand = Ortho_Band1.astype('f4')
+redBand = Ortho_Band1.astype('f4') # Converts pixel number integers to floating point to avoid rounding in calculation
 nirBand = Ortho_Band4.astype('f4')
-NDVI = (nirBand-redBand)/(nirBand+redBand)
+NDVI = (nirBand-redBand)/(nirBand+redBand) # NDVI calculation
 show(NDVI)
 
 # Step four: Reclassify NDVI
