@@ -5,6 +5,7 @@
 import rasterio as rio
 from rasterio.plot import show
 import numpy as np
+import xarray as xr
 
 # Data to import
 DTM = rio.open('C:\GIS_Ulster\Programming\Assignment\Data\DTM.tif')
@@ -26,9 +27,17 @@ DSM_Band1 = DSM.read(1, masked=True)
 NewDTM = DTM_Band1.astype('f4') # Converts pixel number integers to floating point to avoid rounding in calculation
 NewDSM = DSM_Band1.astype('f4')
 nDSM = (NewDSM - NewDTM) # nDSM calculation
-show(nDSM)
+#show(nDSM)
 
 # Step two: Reclassify nDSM
+
+data_min_value = np.nanmin(nDSM) # Calculates minimum pixel value
+data_max_value = np.nanmax(nDSM) # Calculates maximum pixel value
+print(data_min_value, data_max_value)
+
+class_bins = [-np.inf, 2, 4, 10, np.inf] # Reclassifies these pixel values into classes 1, 2, 3, 4 & 5 respectively
+reclass_nDSM = xr.apply_ufunc (np.digitize, nDSM, class_bins) # Digitizes nDSM image to be displayed with new classes
+show(reclass_nDSM)
 
 # Step three: Calculate NDVI from Orthophoto Bands 1 and 4
 
@@ -40,7 +49,7 @@ Ortho_Band4 = Ortho.read(4) # Separares out band 4 (NIR band) from Ortho into it
 redBand = Ortho_Band1.astype('f4')
 nirBand = Ortho_Band4.astype('f4')
 NDVI = (nirBand-redBand)/(nirBand+redBand) # NDVI calculation
-show(NDVI)
+#show(NDVI)
 
 # Step four: Reclassify NDVI
 
