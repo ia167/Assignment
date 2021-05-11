@@ -57,3 +57,8 @@ reclass_NDVI = xr.apply_ufunc(np.digitize, NDVI, class_bins2) # Digitizes nDSM i
 show(reclass_NDVI)
 
 # Step five: Fuse reclassified nDSM and NDVI
+
+clipped_reclass_nDSM = reclass_nDSM[0:2618, 0:23999] # Clips reclassed nDSM to same size as NDVI
+clipped_reclass_NDVI = reclass_NDVI[0:2618, 0:23999]
+fused_image = (clipped_reclass_nDSM + clipped_reclass_NDVI) # Fuses two clipped images together into one final raster
+show(fused_image)
