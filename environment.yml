@@ -1,0 +1,12 @@
+name: egm722
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - gdal=3.1.4
+  - numpy=1.20.2
+  - python=3.8.8
+  - rasterio=1.2.0
+  - rasterstats=0.14.0
+  - xarray=0.18.0
+prefix: C:\Users\Molly\anaconda3\envs\egm722
