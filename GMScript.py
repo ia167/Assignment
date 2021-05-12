@@ -7,6 +7,7 @@ from rasterio.plot import show
 import numpy as np
 import xarray as xr
 
+
 # Data to import
 DTM = rio.open('C:\\GIS_Ulster\\Programming\\Assignment\\Assignment\\Data\\DTM.tif')
 DSM = rio.open('C:\\GIS_Ulster\\Programming\\Assignment\\Assignment\\Data\\DSM.tif')
@@ -26,7 +27,7 @@ DSM_Band1 = DSM.read(1, masked=True)
 NewDTM = DTM_Band1.astype('f4') # Converts pixel number integers to floating point to avoid rounding in calculation
 NewDSM = DSM_Band1.astype('f4')
 nDSM = (NewDSM - NewDTM) # nDSM calculation
-show(nDSM)
+#show(nDSM)
 
 # Step two: Reclassify nDSM
 
@@ -36,7 +37,7 @@ print(data_min_value, data_max_value)
 
 class_bins = [-np.inf, 2, 4, 10, np.inf] # Reclassifies these pixel values into classes 1, 2, 3, 4 & 5 respectively
 reclass_nDSM = xr.apply_ufunc(np.digitize, nDSM, class_bins) # Digitizes nDSM image to be displayed with new classes
-show(reclass_nDSM)
+#show(reclass_nDSM)
 
 # Step three: Calculate NDVI from Orthophoto Bands 1 and 4
 
@@ -48,17 +49,17 @@ Ortho_Band4 = Ortho.read(4) # Separates out band 4 (NIR band) from Ortho into it
 redBand = Ortho_Band1.astype('f4')
 nirBand = Ortho_Band4.astype('f4')
 NDVI = (nirBand-redBand)/(nirBand+redBand) # NDVI calculation
-show(NDVI)
+#show(NDVI)
 
 # Step four: Reclassify NDVI
 
-class_bins2 = [0.5, 1] # Reclassifies these pixel values into classes 1, 2, 3, 4 & 5 respectively
-reclass_NDVI = xr.apply_ufunc(np.digitize, NDVI, class_bins2) # Digitizes nDSM image to be displayed with new classes
-show(reclass_NDVI)
+NDVI[np.where(NDVI <= 0.15)] = 0 # Low NDVI values are separated out to distinguish bare ground from vegetation
+NDVI[np.where(NDVI > 0.15)] = 100 # High NDVI values are given a new value of 100 to assist in visualisation
 
-# Step five: Fuse reclassified nDSM and NDVI
+# Step five: Fuse reclassified nDSM and NDVI and display final image
 
 clipped_reclass_nDSM = reclass_nDSM[0:2618, 0:23999] # Clips reclassed nDSM to same size as NDVI
-clipped_reclass_NDVI = reclass_NDVI[0:2618, 0:23999]
-fused_image = (clipped_reclass_nDSM + clipped_reclass_NDVI) # Fuses two clipped images together into one final raster
-show(fused_image)
+clipped_reclass_NDVI = NDVI[0:2618, 0:23999]
+fused_image = (clipped_reclass_nDSM * clipped_reclass_NDVI) # Fuses two clipped images together into one final raster
+
+show(fused_image, cmap='Greens')
