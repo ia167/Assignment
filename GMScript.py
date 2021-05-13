@@ -14,7 +14,7 @@ DSM = rio.open('C:\\GIS_Ulster\\Programming\\Assignment\\Assignment\\Data\\DSM.t
 Ortho = rio.open('C:\\GIS_Ulster\\Programming\\Assignment\\Assignment\\Data\\Ortho.tif')
 
 # Display DTM image to visualise the area we are working with. Other files cover same area.
-show(DTM)
+show(DTM, cmap='gray')
 print('Coordinate Reference System:', DTM.crs)
 
 
