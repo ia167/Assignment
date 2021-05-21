@@ -25,8 +25,22 @@ DSM = rio.open('C:\\GIS_Ulster\\Programming\\Assignment\\Assignment\\Data\\DSM.t
 Ortho = rio.open('C:\\GIS_Ulster\\Programming\\Assignment\\Assignment\\Data\\Ortho.tif')
 
 # Display DTM image to visualise the area we are working with. Other files cover same area.
+
 show(DTM, cmap='gray')
-print('Coordinate Reference System of DTM:', DTM.crs)
+
+
+# Display Coordinate Reference System (CRS) of DTM
+def display_crs(crsystem):
+    """Function to display CRS of DTM image
+    inputs: DTM raster
+    outputs: CRS
+    """
+
+    return 'Coordinate Reference System of DTM: {}'.format(crsystem)
+
+
+print(display_crs(DTM.crs))
+
 
 # Now processing of data begins to produce fused image
 # Step one: Combine DTM and DSM by subtraction to create nDSM
@@ -68,8 +82,8 @@ NDVI[np.where(NDVI > 0.15)] = 100  # High NDVI values are given a new value of 1
 
 # Step five: Fuse reclassified nDSM and NDVI and display final image
 
-clipped_reclass_nDSM = reclass_nDSM[0:2618, 0:23999]  # Clips reclassed nDSM to same size as NDVI
-clipped_reclass_NDVI = NDVI[0:2618, 0:23999]
+clipped_reclass_nDSM = reclass_nDSM[0:2607, 0:3243]  # Clips reclassed nDSM to same size as NDVI
+clipped_reclass_NDVI = NDVI[0:2607, 0:3243]
 fused_image = (clipped_reclass_nDSM * clipped_reclass_NDVI)  # Fuses two clipped images together into one final raster
 
 show(fused_image, cmap='Greens')  # Displays heights in green, where white is bare ground and dark green is tallest veg
