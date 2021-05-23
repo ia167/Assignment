@@ -1,22 +1,6 @@
-<<<<<<< HEAD
-# Data files
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Band1.tfw
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Band1.tif.aux.xml
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Band1.tif.ovr
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Band1.tif
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Band4.tfw
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Band4.tif.aux.xml
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Band4.tif.ovr
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Band4.tif
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\DSM.tfw
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\DSM.tif.aux.xml
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\DSM.tif.ovr
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\DTM.tfw
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\DTM.tif.aux.xml
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\DTM.tif.ovr
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Ortho.tfw
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Ortho.tif.aux.xml
-C:\GIS_Ulster\Programming\Assignment\Assignment\Data\Ortho.tif.ovr
+### PyCharm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -116,7 +100,8 @@ fabric.properties
 # CodeStream plugin
 # https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml
-=======
+
+### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -133,8 +118,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
 parts/
 sdist/
 var/
@@ -169,6 +152,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+pytestdebug.log
 
 # Translations
 *.mo
@@ -189,6 +173,7 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+doc/_build/
 
 # PyBuilder
 target/
@@ -210,6 +195,9 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
+# poetry
+#poetry.lock
+
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
 
@@ -221,13 +209,15 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
-.venv
+# .env
+.env/
+.venv/
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+pythonenv*
 
 # Spyder project settings
 .spyderproject
@@ -246,4 +236,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
->>>>>>> e95733d02eeeeea9a06f3bb1e0b11fb5a5c245e7
+
+# pytype static type analyzer
+.pytype/
+
+# operating system-related files
+# file properties cache/storage on macOS
+*.DS_Store
+# thumbnail cache on Windows
+Thumbs.db
+
+# profiling data
+.prof
