@@ -1,5 +1,5 @@
-# Script will combine a DTM, DSM and Orthophoto into a fused image for a sample area of Northern Ireland
-# The purpose of this fused image is to make a 'Green Map' displaying five height bands of vegetation
+# This script will combine a DTM, DSM and Orthophoto into a fused image for a sample area of Northern Ireland
+# The purpose of this fused image or 'Green Map' is to display five height bands of vegetation
 
 # Modules to import
 import rasterio as rio
@@ -47,7 +47,7 @@ print(display_crs(DTM.crs))
 
 DTM_Band1 = DTM.read(1, masked=True)  # Creates a masked array
 DSM_Band1 = DSM.read(1, masked=True)
-NewDTM = DTM_Band1.astype('f4')  # Converts pixel number integers to floating point to avoid rounding in calculation
+NewDTM = DTM_Band1.astype('f4')  # Converts pixel number integers to floating point
 NewDSM = DSM_Band1.astype('f4')
 nDSM = (NewDSM - NewDTM)  # nDSM calculation
 
@@ -55,8 +55,8 @@ nDSM = (NewDSM - NewDTM)  # nDSM calculation
 # Step two: Reclassify nDSM into five vegetation height bands: <0.5, 0.5-2, 2-4, 4-10, >10
 
 data_min_value = np.nanmin(nDSM)  # Calculates minimum pixel value
-data_max_value = np.nanmax(nDSM)  # Calculates maximum pixel value
-print('nDSM minimum pixel value =', data_min_value, ', nDSM maximum pixel value =', data_max_value) # Displays Min & Max
+data_max_value = np.nanmax(nDSM)
+print('nDSM minimum pixel value =', data_min_value, ', nDSM maximum pixel value =', data_max_value)
 
 class_bins = [-np.inf, 2, 4, 10, np.inf]  # Reclassifies these pixel values into classes 1, 2, 3, 4 & 5 respectively
 reclass_nDSM = xr.apply_ufunc(np.digitize, nDSM, class_bins)  # Digitizes nDSM image to be displayed with new classes
